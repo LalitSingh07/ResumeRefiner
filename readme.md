@@ -16,7 +16,7 @@ To install ResumeRefiner, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/ResumeRefiner.git
+    git clone https://github.com/lalitsingh07/ResumeRefiner.git
     ```
 2. Navigate to the project directory:
     ```bash
