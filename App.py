@@ -81,8 +81,8 @@ def course_recommender(course_list):
         if c == no_of_reco:
             break
     return rec_course
-
-connection = pymysql.connect(host='localhost',user='root',password='root',db='cv')
+connection = pymysql.connect(host='65.0.135.5',user='frodo',password='MyNewPass1!',db='cv',port=3306)
+# connection = pymysql.connect(host='localhost',user='root',password='root',db='cv')
 cursor = connection.cursor()
 
 
@@ -117,9 +117,13 @@ def run():
     
 
     img = Image.open('./Logo/logo.png')
+ 
+    st.image(img, width = 200)
+
+    st.title("AI Resume Analyzer")
     
     st.sidebar.markdown("# Choose Something...")
-    activities = ["home","User","llm_model", "Feedback", "About", "Admin"]
+    activities = ["User","llm_model", "Feedback", "About", "Admin"]
     choice = st.sidebar.selectbox("Choose among the given options:", activities)
     link = '<b>Built with Streamlit by <a href="https:lalitsingh.000.pe/" style="text-decoration: none; color: #021659;">Lalit Singh </a></b>' 
     st.sidebar.markdown(link, unsafe_allow_html=True)
@@ -174,98 +178,11 @@ def run():
                     );
                 """
     cursor.execute(tablef_sql)
-    if choice == 'home':
-        st.markdown(
-    """
-    <style>
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #4CAF50;
-        padding: 1rem 2rem;
-        border-radius: 10px;
-    }
-    .navbar a {
-        color: white;
-        text-decoration: none;
-        margin: 0 1rem;
-        font-size: 1.2rem;
-    }
-    .navbar a:hover {
-        text-decoration: underline;
-    }
-    </style>
-    <div class="navbar">
-        <div>
-            <a href="#">Home</a>
-            <a href="#about">About</a>
-            <a href="#features">Features</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-        st.image(img)
-
-        # Hero Section
-        st.markdown(
-            """
-            <div style="text-align: center; margin-top: 4rem;">
-                <h1>Welcome to Resume Refiner</h1>
-                <p>Enhance your resume with AI-driven insights and suggestions.</p>
-                <a href="#features" style="background-color: #4CAF50; color: white; padding: 1rem 2rem; border-radius: 5px; text-decoration: none;">Explore Features</a>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-        # About Section
-        st.markdown(
-            """
-            <div id="about" style="margin-top: 6rem;">
-                <h2>About Resume Refiner</h2>
-                <p>Resume Refiner is an AI-powered tool that helps you craft the perfect resume by providing real-time feedback, keyword optimization, and actionable suggestions to ensure your resume stands out.</p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-        # Features Section
-        st.markdown(
-            """
-            <div id="features" style="margin-top: 4rem;">
-                <h2>Features</h2>
-                <ul>
-                    <li>AI Resume Analysis</li>
-                    <li>Keyword Optimization</li>
-                    <li>Customizable Resume Templates</li>
-                    <li>ATS (Applicant Tracking System) Friendly</li>
-                    <li>Instant Feedback and Suggestions</li>
-                </ul>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-        # Contact Section
-        st.markdown(
-            """
-            <div id="contacts" style="margin-top: 6rem; text-align: center;">
-                <h2>Contact Us</h2>
-                <p>Have any questions or need support? Reach out to us at <a href="mailto:support@resumerefiner.com">support@resumerefiner.com</a></p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-        
-
+  
 
    
         
-    elif choice == 'User':
+    if choice == 'User':
         
         act_name = st.text_input('Name*')
         act_mail = st.text_input('Mail*')
@@ -639,8 +556,6 @@ def run():
    
                 resume_text = pdf_reader(save_image_path)
                 
-                with open('jobDescription.txt', 'r') as job_description_file:
-                    jobDescription = job_description_file.read()
 
                 client = Groq(api_key="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")
                 completion = client.chat.completions.create(
@@ -737,17 +652,7 @@ def run():
             A tool which parses information from a resume using natural language processing and finds the keywords, cluster them onto sectors based on their keywords. And lastly show recommendations, predictions, analytics to the applicant based on keyword matching.
         </p>
 
-        <p align="justify">
-            <b>How to use it: -</b> <br/><br/>
-            <b>User -</b> <br/>
-            In the Side Bar choose yourself as user and fill the required fields and upload your resume in pdf format.<br/>
-            Just sit back and relax our tool will do the magic on it's own.<br/><br/>
-            <b>Feedback -</b> <br/>
-            A place where user can suggest some feedback about the tool.<br/><br/>
-            <b>Admin -</b> <br/>
-            For login use <b>admin</b> as username and <b>mca@123</b> as password.<br/>
-            It will load all the required stuffs and perform analysis.
-        </p><br/><br/>
+      <br/><br/>
 
         <p align="justify">
             Built with Streamlit by 
